@@ -1,0 +1,42 @@
+html {
+    background-color: rgb(11, 40, 63);
+}
+
+body {
+    max-width: 800px;
+    margin: 50px 50px 50px 50px;
+    padding: 20px;
+    /* border: 5px solid ivory; */
+    color: rgb(255, 253, 240);
+    background-color: rgb(25, 35, 46);
+    counter-reset: h2counter;
+    letter-spacing: 1px;
+    font-size: 18px;
+}
+
+a {
+    color:rgb(0, 214, 230);
+}
+
+p {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 80%;
+    line-height: 120%;
+}
+
+h1, h2, h3, h4 {
+    font-family: Futura;
+    font-variant: small-caps;
+    color: rgb(0, 214, 230);
+}
+
+h1 {
+    counter-reset: h2counter;
+    text-align: center;
+    
+}
+
+h2:before {
+    content: counter(h2counter) ".\0000a0\0000a0";
+    counter-increment: h2counter;
+}

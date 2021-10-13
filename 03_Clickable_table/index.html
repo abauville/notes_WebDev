@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>CSS waves</title>
+    <style>
+        html {
+            
+            background-color: black;
+        }
+        body {
+            width: 240px;
+            /* height: 100px; */
+            background-color: white;
+        }
+        .divTable{
+            display: table;
+            width: 100%
+            /* width: 300px; */
+            /* height: 100%; */
+        }
+        .divTableBody {
+            display: table-row-group;
+            /* width: 300px; */
+        }
+        .divTableRow {
+            display: table-row;
+            /* width: 300px; */
+        } 
+        .divTableCell {
+            border: 1px solid #999999;
+            display: table-cell;
+            /* width: 10px; */
+            line-height: 38px;
+            padding: 5px;
+            /* width: 50px; */
+            /* height: 5px; */
+            /* padding: 3px 10px; */
+            cursor: pointer;
+
+
+            -moz-user-select: -moz-none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+
+        }
+        .divTableCell:hover {
+            border: solid yellow 2px;
+            padding: 0px;
+        }
+
+        .unclicked {
+            background-color: rgb(184, 33, 33);
+        }
+
+        .clicked {
+            background-color: rgb(92, 92, 189);
+        }
+
+        .divTableCell:active {
+            background-color: rgb(92, 189, 105);
+        }
+
+        .divTableCell:focus {
+            background-color: rgb(171, 189, 92);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="divTable">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+            </div>
+            <div class="divTableRow">
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+                <div class="divTableCell">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+    <!-- DivTable.com -->
+</body>
+
+
+<script>
+    cells = document.getElementsByClassName("divTableCell");
+    for (var i=0; i<cells.length; i++) {
+        cells[i].classList.add("clicked");
+        cells[i].onclick = function () {
+            if (this.classList.contains("unclicked")) {
+                this.classList.remove("unclicked");
+                this.classList.add("clicked");
+            } else {
+                this.classList.remove("clicked");
+                this.classList.add("unclicked");
+            }
+
+            // this.is_clicked = !this.is_clicked;
+            console.log(this.className)
+            
+            
+        }
+    }
+
+</script>
+
+</html>
