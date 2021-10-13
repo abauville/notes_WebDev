@@ -2,6 +2,11 @@
 
 <html lang="en">
 
+<!-- To do:
+    - add sliders to change the table
+    - press shift to trigger the eraser
+-->
+
 <head>
     <meta charset="utf-8">
     <title>CSS waves</title>
@@ -11,13 +16,13 @@
             background-color: black;
         }
         body {
-            width: 240px;
+            width: 500px;
             /* height: 100px; */
             background-color: white;
         }
         .divTable{
             display: table;
-            width: 100%
+            /* width: 200%; */
             /* width: 300px; */
             /* height: 100%; */
         }
@@ -32,8 +37,9 @@
         .divTableCell {
             border: 1px solid #999999;
             display: table-cell;
-            /* width: 10px; */
-            line-height: 38px;
+            width: 20px;
+            height: 20px;
+            /* line-height: 38px; */
             padding: 5px;
             /* width: 50px; */
             /* height: 5px; */
@@ -54,7 +60,7 @@
         }
 
         .unclicked {
-            background-color: rgb(184, 33, 33);
+            background-color: rgb(226, 226, 226);
         }
 
         .clicked {
@@ -72,81 +78,86 @@
 </head>
 
 <body>
-    <div class="divTable">
-        <div class="divTableBody">
-            <div class="divTableRow">
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-            </div>
-            <div class="divTableRow">
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-            </div>
-            <div class="divTableRow">
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-            </div>
-            <div class="divTableRow">
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-            </div>
-            <div class="divTableRow">
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-            </div>
-            <div class="divTableRow">
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-                <div class="divTableCell">&nbsp;</div>
-            </div>
-        </div>
-    </div>
-    <!-- DivTable.com -->
+    <h1 id="begin"> Here is my table</h1>
+    
 </body>
 
 
 <script>
+    // Create a dynamic table
+    let table = document.createElement("div");
+    table.className = "divTable";
+    let table_body = document.createElement("div");
+    table_body.className = "divTableBody"; 
+
+    let n_row = 8
+    let n_col = 8
+    
+    for (let i_row=0; i_row<n_row; i_row++) {
+        let table_row = document.createElement("div");
+        table_row.className = "divTableBody";
+        for (let i_col=0; i_col<n_col; i_col++) {
+            let table_cell = document.createElement("div");
+            table_cell.className = "divTableCell";
+            table_row.appendChild(table_cell);
+        }
+        table_body.appendChild(table_row);
+    }
+
+
+    // mouse events
+    var mouseDown = false;
+    document.body.onmousedown = function() { 
+        mouseDown=true;
+    }
+    document.body.onmouseup = function() {
+        mouseDown=false;
+    }
+
+    // getting sure that mouseDown doesn't get tricked when the mouse leaves the window
+    table.addEventListener("mouseenter", function () {
+        mouseDown=false;
+    }, false);
+    table.addEventListener("mouseleave", function () {
+        mouseDown=false;
+    }, false);
+    
+    table.appendChild(table_body);
+    document.body.appendChild(table);
+    
+    
+    ;
     cells = document.getElementsByClassName("divTableCell");
     for (var i=0; i<cells.length; i++) {
-        cells[i].classList.add("clicked");
-        cells[i].onclick = function () {
-            if (this.classList.contains("unclicked")) {
-                this.classList.remove("unclicked");
-                this.classList.add("clicked");
-            } else {
-                this.classList.remove("clicked");
-                this.classList.add("unclicked");
-            }
+        cells[i].classList.add("unclicked");
+        cells[i].onmousedown = function() {set_cell_state(this, true, false);};
+        cells[i].onmouseover = function() {set_cell_state(this, false, true);};
+        // cells[i].onactivate = function() {set_cell_state(this, false, false);};
+    }
 
-            // this.is_clicked = !this.is_clicked;
-            console.log(this.className)
-            
-            
+    function set_cell_state(cell, is_switchable, use_mouseDown) {
+        console.log("here")
+        let mouse_check = mouseDown;
+        if (use_mouseDown) {
+            mouse_check = mouseDown;
+        } else {
+            mouse_check = true;
+        }
+        if (mouse_check) {
+            if (cell.classList.contains("unclicked")) {
+                    cell.classList.remove("unclicked");
+                    cell.classList.add("clicked");
+            } else {
+                if (is_switchable) {
+                    cell.classList.remove("clicked");
+                    cell.classList.add("unclicked");
+                }
+            }
         }
     }
+
+    
+
 
 </script>
 
